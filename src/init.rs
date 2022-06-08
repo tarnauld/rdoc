@@ -3,7 +3,7 @@ use ferris_says::say;
 use std::fs;
 use std::io::{stdout, BufWriter};
 
-pub fn init_sub_command<'help>() -> Command<'help> {
+pub fn init_init_command<'help>() -> Command<'help> {
     return Command::new("init")
         .about("Create an empty Rdoc directory");
 }
