@@ -6,22 +6,23 @@ pub fn init_index_command<'help>() -> Command<'help> {
 }
 
 pub fn create_index() {
-    let repo = match Repository::open("/Users/timotheearnauld/Documents/rust/rdoc") {
+    let repo = match Repository::open("./") {
         Ok(repo) => repo,
         Err(e) => panic!("failed to open: {}", e),
     };
 
-    let mut revwalk = match repo.revwalk() {
-        Ok(revwallk) => revwallk,
+    let mut e = *get_revwalk(&repo);
+    let _x = e.push_head();
+    print_ids(e);
+}
+
+fn get_revwalk<'scope>(repo: &'scope Repository) -> Box<Revwalk<'scope>> {
+    return match repo.revwalk() {
+        Ok(revwalk) => {
+            Box::new(revwalk)
+        },
         Err(e) => panic!("{}", e),
     };
-
-    match revwalk.push_head() {
-        Ok(_) => (),
-        Err(e) => panic!("{}", e)
-    }
-
-    print_ids(revwalk);
 }
 
 fn print_ids(revwalk: Revwalk) {
