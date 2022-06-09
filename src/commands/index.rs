@@ -1,6 +1,9 @@
 use chrono::prelude::*;
 use clap::Command;
 use git2::{Repository, Revwalk};
+use std::fs::File;
+use std::io::prelude::*;
+use serde_derive::{Serialize, Deserialize};
 
 pub fn init_index_command<'help>() -> Command<'help> {
     return Command::new("index").about("Generate the rdoc index.");
@@ -15,7 +18,10 @@ pub fn create_index() {
     let revwalk = *get_revwalk(&repo);
     let infos = get_commits(&repo, revwalk);
 
-    print_infos(infos);
+    match write_file(infos) {
+        Ok(_) => (),
+        Err(_) => panic!(),
+    };
 }
 
 fn get_revwalk<'scope>(repo: &'scope Repository) -> Box<Revwalk<'scope>> {
@@ -49,9 +55,9 @@ fn find_commit(repo: &Repository, commit_id: git2::Oid) -> CommitInfo {
     match repo.find_commit(commit_id) {
         Ok(commit) => {
             return CommitInfo {
-                id: commit.id(),
+                id: format!("{}", commit.id()),
                 author: extract_commit_author(&commit),
-                date: NaiveDateTime::from_timestamp(commit.time().seconds(), 0),
+                date: format!("{}", NaiveDateTime::from_timestamp(commit.time().seconds(), 0)),
                 message: extract_commit_message(&commit),
             };
         }
@@ -73,23 +79,17 @@ fn extract_commit_message(commit: &git2::Commit) -> String {
     };
 }
 
-fn print_infos(commit_infos: Vec<CommitInfo>) {
-    for commit_info in commit_infos {
-        println!(
-            "{{
-            id: {},
-            author: {},
-            date: {},
-            message: {}
-        }}",
-            commit_info.id, commit_info.author, commit_info.date, commit_info.message
-        );
-    }
+fn write_file(commits_info: Vec<CommitInfo>) -> std::io::Result<()> {
+    let mut file = File::create("./.rdoc/index.json")?;
+    let json_commits_infos = serde_json::to_string_pretty(&commits_info)?;
+    file.write_all(json_commits_infos.as_bytes())?;
+    Ok(())
 }
 
+#[derive(Serialize, Deserialize, Debug)]
 struct CommitInfo {
-    id: git2::Oid,
+    id: String,
     author: String,
-    date: NaiveDateTime,
+    date: String,
     message: String,
 }
