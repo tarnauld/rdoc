@@ -12,7 +12,7 @@ pub fn create_index() {
     };
 
     let e = *get_revwalk(&repo);
-    print_ids(e);
+    print_infos(&repo, e);
 }
 
 fn get_revwalk<'scope>(repo: &'scope Repository) -> Box<Revwalk<'scope>> {
@@ -32,11 +32,24 @@ fn push_head(mut revwalk: Revwalk) -> Revwalk {
     return revwalk;
 }
 
-fn print_ids(revwalk: Revwalk) {
-    for id in revwalk {
-        match id {
-            Ok(id) => println!("{}", id),
+fn print_infos(repo: &Repository, revwalk: Revwalk) {
+    for commit_id in revwalk {
+        match commit_id {
+            Ok(id) => get_commit(&repo, id),
             Err(e) => panic!("{}", e),
         }
+    }
+}
+
+fn get_commit(repo: &Repository, commit_id: git2::Oid) {
+    match repo.find_commit(commit_id) {
+        Ok(commit) => {
+            let commit_message = match commit.message() {
+                Some(e) => e,
+                None => ""
+            };
+            println!("{}: {:?}", commit.id(), commit_message)
+        },
+        Err(e) => panic!("{}", e)
     }
 }
