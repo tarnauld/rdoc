@@ -11,18 +11,25 @@ pub fn create_index() {
         Err(e) => panic!("failed to open: {}", e),
     };
 
-    let mut e = *get_revwalk(&repo);
-    let _x = e.push_head();
+    let e = *get_revwalk(&repo);
     print_ids(e);
 }
 
 fn get_revwalk<'scope>(repo: &'scope Repository) -> Box<Revwalk<'scope>> {
     return match repo.revwalk() {
         Ok(revwalk) => {
-            Box::new(revwalk)
+            Box::new(push_head(revwalk))
         },
         Err(e) => panic!("{}", e),
     };
+}
+
+fn push_head(mut revwalk: Revwalk) -> Revwalk {
+    match revwalk.push_head() {
+        Ok(_) => (),
+        Err(e) => panic!("{}", e)
+    } 
+    return revwalk;
 }
 
 fn print_ids(revwalk: Revwalk) {
