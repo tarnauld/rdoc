@@ -1,6 +1,6 @@
+use chrono::prelude::*;
 use clap::Command;
 use git2::{Repository, Revwalk};
-use chrono::prelude::*;
 
 pub fn init_index_command<'help>() -> Command<'help> {
     return Command::new("index").about("Generate the rdoc index.");
@@ -12,8 +12,10 @@ pub fn create_index() {
         Err(e) => panic!("failed to open: {}", e),
     };
 
-    let e = *get_revwalk(&repo);
-    print_infos(&repo, e);
+    let revwalk = *get_revwalk(&repo);
+    let infos = get_commits(&repo, revwalk);
+
+    print_infos(infos);
 }
 
 fn get_revwalk<'scope>(repo: &'scope Repository) -> Box<Revwalk<'scope>> {
@@ -31,35 +33,63 @@ fn push_head(mut revwalk: Revwalk) -> Revwalk {
     return revwalk;
 }
 
-fn print_infos(repo: &Repository, revwalk: Revwalk) {
+fn get_commits(repo: &Repository, revwalk: Revwalk) -> Vec<CommitInfo> {
+    let mut array = Vec::new();
     for commit_id in revwalk {
         match commit_id {
-            Ok(id) => get_commit(&repo, id),
+            Ok(id) => array.push(find_commit(&repo, id)),
             Err(e) => panic!("{}", e),
         }
     }
+
+    return array;
 }
 
-fn get_commit(repo: &Repository, commit_id: git2::Oid) {
+fn find_commit(repo: &Repository, commit_id: git2::Oid) -> CommitInfo {
     match repo.find_commit(commit_id) {
         Ok(commit) => {
-            let commit_message = match commit.message() {
-                Some(e) => e,
-                None => "",
+            return CommitInfo {
+                id: commit.id(),
+                author: extract_commit_author(&commit),
+                date: NaiveDateTime::from_timestamp(commit.time().seconds(), 0),
+                message: extract_commit_message(&commit),
             };
-            println!(
-                "{{
-                id: {},
-                date: {:?},
-                message: {},
-                author: {}
-             }}",
-                commit.id(),
-                NaiveDateTime::from_timestamp(commit.time().seconds(), 0),
-                commit_message.replace("\n", ""),
-                commit.author()
-            )
         }
         Err(e) => panic!("{}", e),
     }
+}
+
+fn extract_commit_author(commit: &git2::Commit) -> String {
+    return match commit.author().name() {
+        Some(e) => String::from(e),
+        None => String::from(""),
+    };
+}
+
+fn extract_commit_message(commit: &git2::Commit) -> String {
+    return match commit.message() {
+        Some(e) => e.replace("\n", ""),
+        None => String::from(""),
+    };
+}
+
+fn print_infos(commit_infos: Vec<CommitInfo>) {
+    for commit_info in commit_infos {
+        println!(
+            "{{
+            id: {},
+            author: {},
+            date: {},
+            message: {}
+        }}",
+            commit_info.id, commit_info.author, commit_info.date, commit_info.message
+        );
+    }
+}
+
+struct CommitInfo {
+    id: git2::Oid,
+    author: String,
+    date: NaiveDateTime,
+    message: String,
 }
