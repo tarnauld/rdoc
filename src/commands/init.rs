@@ -10,14 +10,11 @@ pub fn init_init_command<'help>() -> Command<'help> {
 
 pub fn init_project() {
     let result = fs::create_dir("./.rdoc");
-    match result {
-        Ok(_) => {
-            log(b"rdoc is now installed. Welcome!");
-        }
-        Err(_) => {
-            log(b"rdoc is already installed. Nothing to do.");
-        }
-    }
+    let display = match result {
+        Ok(_) => "rdoc is now installed. Welcome!",
+        Err(_) => "rdoc is already installed. Nothing to do."
+    };
+    log(display.as_bytes());
 }
 
 fn log(s: &[u8]) {
