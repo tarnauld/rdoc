@@ -1,5 +1,6 @@
 use clap::Command;
 use git2::{Repository, Revwalk};
+use chrono::prelude::*;
 
 pub fn init_index_command<'help>() -> Command<'help> {
     return Command::new("index").about("Generate the rdoc index.");
@@ -17,9 +18,7 @@ pub fn create_index() {
 
 fn get_revwalk<'scope>(repo: &'scope Repository) -> Box<Revwalk<'scope>> {
     return match repo.revwalk() {
-        Ok(revwalk) => {
-            Box::new(push_head(revwalk))
-        },
+        Ok(revwalk) => Box::new(push_head(revwalk)),
         Err(e) => panic!("{}", e),
     };
 }
@@ -27,8 +26,8 @@ fn get_revwalk<'scope>(repo: &'scope Repository) -> Box<Revwalk<'scope>> {
 fn push_head(mut revwalk: Revwalk) -> Revwalk {
     match revwalk.push_head() {
         Ok(_) => (),
-        Err(e) => panic!("{}", e)
-    } 
+        Err(e) => panic!("{}", e),
+    }
     return revwalk;
 }
 
@@ -46,10 +45,21 @@ fn get_commit(repo: &Repository, commit_id: git2::Oid) {
         Ok(commit) => {
             let commit_message = match commit.message() {
                 Some(e) => e,
-                None => ""
+                None => "",
             };
-            println!("{}: {:?}", commit.id(), commit_message)
-        },
-        Err(e) => panic!("{}", e)
+            println!(
+                "{{
+                id: {},
+                date: {:?},
+                message: {},
+                author: {}
+             }}",
+                commit.id(),
+                NaiveDateTime::from_timestamp(commit.time().seconds(), 0),
+                commit_message.replace("\n", ""),
+                commit.author()
+            )
+        }
+        Err(e) => panic!("{}", e),
     }
 }
