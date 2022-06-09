@@ -1,6 +1,5 @@
 use crate::models::commit;
-use crate::utils::file;
-use crate::utils::say;
+use crate::utils::{css, file, say};
 use clap::Command;
 use new_string_template::template::Template;
 use std::collections::HashMap;
@@ -12,6 +11,7 @@ pub fn init_generate_command<'authors>() -> Command<'authors> {
 pub fn generate() {
     let commits: Vec<commit::CommitInfo> = file::get_commits_from_index();
     create_index_html(&commits);
+    css::generate_css_file();
     generate_files(commits);
 }
 
@@ -19,10 +19,13 @@ fn create_index_html(commits: &Vec<commit::CommitInfo>) {
     let doc = "<html>
             <head>
                 <title>Rdoc - HTML Report</title>
-                <meta name=\"Metadata::Author\" content=\"Not Sanrio Co., Ltd\"/>
+                <meta name=\"Metadata::Author\" content=\"Rdoc\"/>
+                <link rel=\"stylesheet\" href=\"./style.css\"/>
             </head>
             <body>
-                <h1>Rdoc HTML Report</h1>
+                <div class=\"header\">
+                    <span>Rdoc HTML Report</span>
+                </div>
                 <ul>
                 {commits}
                 </ul>
@@ -37,7 +40,7 @@ fn create_index_html(commits: &Vec<commit::CommitInfo>) {
 
     let rendered = templ.render(&data).expect("Expected Result to be Ok");
 
-    match file::save_html_file("index.html", &rendered) {
+    match file::save_file("index.html", &rendered) {
         Ok(_) => say::log("HTML report generated!"),
         Err(_) => println!("Cannot generate HTML report."),
     };
@@ -49,7 +52,9 @@ fn generate_links(commits: &Vec<commit::CommitInfo>) -> String {
     commits.iter().for_each(|commit| {
         let s: String = format!(
             "<li><a href=\"{}.html\">{}</a>: {}</li>",
-            commit.id, commit.id, commit.message
+            commit.id,
+            &commit.id[..6],
+            commit.message
         );
         links.push_str(s.as_str());
     });
@@ -62,9 +67,13 @@ fn generate_files(commits: Vec<commit::CommitInfo>) {
         let doc = "<html>
         <head>
             <title>Rdoc - HTML Report</title>
-            <meta name=\"Metadata::Author\" content=\"Not Sanrio Co., Ltd\"/>
+            <meta name=\"Metadata::Author\" content=\"Rdoc\"/>
+            <link rel=\"stylesheet\" href=\"./style.css\"/>
         </head>
         <body>
+            <div class=\"header\">
+                <span>Rdoc HTML Report</span>
+            </div>
             <h1>{commit_id}</h1>
             <h2>{commit_authors}</h2>
             <h3>{commit_date}</h3>
@@ -86,7 +95,7 @@ fn generate_files(commits: Vec<commit::CommitInfo>) {
 
         let rendered = templ.render(&data).expect("Expected Result to be Ok");
 
-        match file::save_html_file(format!("{}.html", commit.id).as_str(), &rendered) {
+        match file::save_file(format!("{}.html", commit.id).as_str(), &rendered) {
             Ok(_) => (),
             Err(_) => (),
         }
