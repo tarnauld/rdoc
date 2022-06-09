@@ -26,3 +26,9 @@ pub fn get_commits_from_index() -> Vec<commit::CommitInfo> {
         }
     };
 }
+
+pub fn save_html_file(source: &str, doc: &str) -> std::io::Result<()> {
+    let mut file = File::create(format!("./.rdoc/{}", source))?;
+    file.write_all(doc.as_bytes())?;
+    Ok(()) 
+}

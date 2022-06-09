@@ -12,5 +12,5 @@ pub fn init_project() {
         Ok(_) => "rdoc is now installed. Welcome!",
         Err(_) => "rdoc is already installed. Nothing to do.",
     };
-    say::log(display.as_bytes());
+    say::log(display);
 }
