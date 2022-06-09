@@ -3,21 +3,21 @@ use clap::Command;
 use crate::utils::file;
 use crate::models::commit;
 
-pub fn init_tag_command<'tag>() -> Command<'tag> {
-    return Command::new("tag")
-        .about("Add tag for a commit")
+pub fn init_authors_command<'authors>() -> Command<'authors> {
+    return Command::new("authors")
+        .about("Add authors for a commit")
         .arg(Arg::new("commit").required(true))
-        .arg(Arg::new("tag").required(true));
+        .arg(Arg::new("authors").required(true));
 }
 
-pub fn create_tag(commit: Option<&str>, tag: Option<&str>) {
+pub fn update_authors(commit: Option<&str>, authors: Option<&str>) {
     let commit_id = get_option(commit);
-    let tag = get_option(tag);
+    let authors = get_option(authors);
 
     let mut commits: Vec<commit::CommitInfo> = file::get_commits_from_index();
     commits.iter_mut().for_each(|commit| {
         if commit.id == commit_id {
-            commit.update_tag(String::from(tag));
+            commit.update_authors(String::from(authors));
         }
     });
 
