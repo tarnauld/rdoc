@@ -1,13 +1,15 @@
 pub fn template_css<'style>() -> &'style str {
-    "html,
-    body {
+    "html, body {
         width: 100%;
         height: 100%;
+        overflow: auto;
     }
     
     body {
         background-color: white;
         margin: 0;
+        display: flex;
+        flex-direction: column;
     }
     
     .header {
@@ -26,6 +28,7 @@ pub fn template_css<'style>() -> &'style str {
         margin: 1.5em;
         display: flex;
         flex-direction: column;
+        overflow: auto;
     }
     
     .item {
@@ -85,6 +88,23 @@ pub fn template_css<'style>() -> &'style str {
     .fingerprint-container {
         display: flex;
         align-items: center;
+    }
+
+    .commit-container {
+        height: 100%;
+        background-color: #e6e6e6;
+        margin: 1.5em;
+        border-radius: 5px;
+        box-shadow: 0px 1px 6px #ccc;
+        padding: 1.5em;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .footer {
+        content: '';
+        width: 100%;
+        height: 50px;
+        background-color: #02174c;
     }
     
     "

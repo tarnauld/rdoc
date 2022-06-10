@@ -5,3 +5,4 @@ pub mod header;
 pub mod link;
 pub mod fingerprint;
 pub mod authors;
+pub mod footer;

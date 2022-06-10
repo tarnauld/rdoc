@@ -10,6 +10,7 @@ pub fn template_index<'index>() -> &'index str {
             <div class=\"items-container\">
                 {commits}
             </div>
+            {footer}
         </body>
     </html>"
 }
