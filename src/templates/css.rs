@@ -10,6 +10,7 @@ pub fn template_css<'style>() -> &'style str {
         margin: 0;
         display: flex;
         flex-direction: column;
+        color: #333;
     }
     
     .header {
@@ -39,6 +40,11 @@ pub fn template_css<'style>() -> &'style str {
         box-shadow: 0px 1px 6px #ccc;
         padding: 1em;
         display: flex;
+        cursor: pointer;
+    }
+
+    .item:hover {
+        background-color: #ddd;
     }
     
     .commit-id {
@@ -47,9 +53,14 @@ pub fn template_css<'style>() -> &'style str {
         width: 100%;
     }
 
-    .commit-id a {
+    a {
         text-decoration: none;
         color: #333;
+    }
+
+    hr {
+        border-top: 2px solid #bbb;
+        border-radius: 2px;
     }
 
     .title {
@@ -98,6 +109,18 @@ pub fn template_css<'style>() -> &'style str {
         box-shadow: 0px 1px 6px #ccc;
         padding: 1.5em;
         font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .commit-container .commit-id {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .commit-container .commit-id h1 {
+        font-size: 2em;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: normal;
+        color: #333;
     }
 
     .footer {

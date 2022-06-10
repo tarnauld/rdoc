@@ -3,11 +3,11 @@ use crate::templates::{fingerprint, authors};
 
 pub fn template_link<'link>(commit: &commit::CommitInfo) -> Box<String>{
     Box::new(format!(
-        "<div class=\"item\">
+        "<a href=\"{}\" class=\"item\">
             {}
             <div class=\"commit-id\">
                 <div class=\"title\">
-                    <a href=\"{}.html\">{}</a>
+                    <div>{}</div>
                 </div>
                 <div class=\"metadatas\">
                     <div class=\"authors\">
@@ -18,9 +18,9 @@ pub fn template_link<'link>(commit: &commit::CommitInfo) -> Box<String>{
                     {}
                 </div>
             </div>
-        </div>\n",
+        </a>\n",
+        format!("{}.html", commit.id),
         fingerprint::template_fingerprint(),
-        commit.id,
         &commit.id[..6],
         *authors::template_authors(&commit.authors),
         commit.message

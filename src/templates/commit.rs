@@ -8,9 +8,13 @@ pub fn template_commit<'commit>() -> &'commit str {
         <body>
             {header}
             <div class=\"commit-container\">
-                <h1>{commit_id}</h1>
-                <div>{commit_authors}</div>
+                <div class=\"commit-id\">
+                    {fingerprint}
+                    <h1>{commit_id}</h1>
+                </div>
+                <hr/>
                 <h3>{commit_date}</h3>
+                <div>{commit_authors}</div>
                 <p>
                 {commit_message}
                 </p>

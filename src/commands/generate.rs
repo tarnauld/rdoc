@@ -54,6 +54,7 @@ fn generate_files(commits: Vec<commit::CommitInfo>) {
             let mut map = HashMap::new();
             map.insert("header", templates::header::template_header());
             map.insert("commit_id", &commit.id);
+            map.insert("fingerprint", templates::fingerprint::template_fingerprint());
             map.insert("commit_authors", &*authors.as_str());
             map.insert("commit_date", &commit.date);
             map.insert("commit_message", &commit.message);
