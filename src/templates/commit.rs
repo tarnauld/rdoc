@@ -15,7 +15,7 @@ pub fn template_commit<'commit>() -> &'commit str {
                 </div>
                 <hr/>
                 <h3>{commit_date}</h3>
-                <div>{commit_authors}</div>
+                <div class=\"authors\">{commit_authors}</div>
                 <p>
                     {commit_message}
                 </p>

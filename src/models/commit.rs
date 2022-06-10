@@ -18,7 +18,7 @@ impl CommitInfo {
     }
 
     pub fn update_authors(&mut self, authors: String) {
-        self.authors = String::from(format!("{};{}", self.author, authors));
+        self.authors = String::from(format!("{};{}", self.authors, authors));
     }
 
     pub fn update_description(&mut self, description: &String) {
