@@ -7,3 +7,4 @@ pub mod fingerprint;
 pub mod authors;
 pub mod footer;
 pub mod tags;
+pub mod search;

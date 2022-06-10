@@ -24,15 +24,31 @@ pub fn template_css<'style>() -> &'style str {
         display: flex;
         align-items: center;
         margin: 0;
-        height: 140px;
+        height: 60px;
         width: 100%;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
     }
+
+    .search {
+        background-color: #5471d2;
+        height: 50px;
+        display: flex;
+        padding: 15px;
+    }
+
+    .search input {
+        border-radius: 2px;
+        border: transparent;
+    }
+
+    .search input:focus-visible {
+        outline: none;
+    }
     
     .items-container {
         height: 100%;
-        margin: 1.5em;
+        padding: 1.5em;
         display: flex;
         flex-direction: column;
         overflow: auto;

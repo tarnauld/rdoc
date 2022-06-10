@@ -22,6 +22,7 @@ fn create_index_html(commits: &Vec<commit::CommitInfo>) {
     let data = {
         let mut map = HashMap::new();
         map.insert("header", String::from(templates::header::template_header()));
+        map.insert("search", String::from(*templates::search::template_search()));
         map.insert("commits", generate_links(commits));
         map.insert("footer", String::from(templates::footer::template_footer()));
         map

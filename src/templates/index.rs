@@ -8,6 +8,7 @@ pub fn template_index<'index>() -> &'index str {
         </head>
         <body>
             {header}
+            {search}
             <div class=\"items-container\">
                 {commits}
             </div>
