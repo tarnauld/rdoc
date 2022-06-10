@@ -38,6 +38,6 @@ fn get_fingerprint_svg<'fingerprint>() -> &'fingerprint str {
 pub fn save_favicon() {
     match file::save_file("favicon.svg", &get_fingerprint_svg()) {
         Ok(_) => (),
-        Err(_) => println!("Cannot generate HTML report."),
+        Err(_) => (),
     };
 }
