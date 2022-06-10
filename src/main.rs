@@ -2,6 +2,7 @@ mod commands;
 mod matcher;
 mod models;
 mod utils;
+mod templates;
 
 pub fn main() {
     let cmd = commands::init_commands();

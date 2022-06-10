@@ -1,4 +1,5 @@
 use crate::models::commit;
+use crate::templates;
 use crate::utils::{css, file, say};
 use clap::Command;
 use new_string_template::template::Template;
@@ -16,22 +17,7 @@ pub fn generate() {
 }
 
 fn create_index_html(commits: &Vec<commit::CommitInfo>) {
-    let doc = "<html>
-            <head>
-                <title>Rdoc - HTML Report</title>
-                <meta name=\"Metadata::Author\" content=\"Rdoc\"/>
-                <link rel=\"stylesheet\" href=\"./style.css\"/>
-            </head>
-            <body>
-                <div class=\"header\">
-                    <span>Rdoc HTML Report</span>
-                </div>
-                <ul>
-                {commits}
-                </ul>
-            </body>
-        </html>";
-    let templ = Template::new(doc);
+    let templ = Template::new(templates::index::template_index());
     let data = {
         let mut map = HashMap::new();
         map.insert("commits", generate_links(commits));
@@ -51,7 +37,7 @@ fn generate_links(commits: &Vec<commit::CommitInfo>) -> String {
 
     commits.iter().for_each(|commit| {
         let s: String = format!(
-            "<li><a href=\"{}.html\">{}</a>: {}</li>",
+            "<li><a href=\"{}.html\">{}</a>: {}</li>\n",
             commit.id,
             &commit.id[..6],
             commit.message
@@ -64,25 +50,7 @@ fn generate_links(commits: &Vec<commit::CommitInfo>) -> String {
 
 fn generate_files(commits: Vec<commit::CommitInfo>) {
     commits.iter().for_each(|commit| {
-        let doc = "<html>
-        <head>
-            <title>Rdoc - HTML Report</title>
-            <meta name=\"Metadata::Author\" content=\"Rdoc\"/>
-            <link rel=\"stylesheet\" href=\"./style.css\"/>
-        </head>
-        <body>
-            <div class=\"header\">
-                <span>Rdoc HTML Report</span>
-            </div>
-            <h1>{commit_id}</h1>
-            <h2>{commit_authors}</h2>
-            <h3>{commit_date}</h3>
-            <p>
-            {commit_message}
-            </p>
-        </body>
-    </html>";
-        let templ = Template::new(doc);
+        let templ = Template::new(templates::commit::template_commit());
 
         let data = {
             let mut map = HashMap::new();
