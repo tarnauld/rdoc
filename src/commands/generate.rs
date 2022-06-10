@@ -20,6 +20,7 @@ fn create_index_html(commits: &Vec<commit::CommitInfo>) {
     let templ = Template::new(templates::index::template_index());
     let data = {
         let mut map = HashMap::new();
+        map.insert("header", String::from(templates::header::template_header()));
         map.insert("commits", generate_links(commits));
         map
     };
@@ -36,13 +37,7 @@ fn generate_links(commits: &Vec<commit::CommitInfo>) -> String {
     let mut links = String::new();
 
     commits.iter().for_each(|commit| {
-        let s: String = format!(
-            "<li><a href=\"{}.html\">{}</a>: {}</li>\n",
-            commit.id,
-            &commit.id[..6],
-            commit.message
-        );
-        links.push_str(s.as_str());
+        links.push_str(&*templates::link::template_link(&commit).as_str());
     });
 
     return links;
@@ -54,6 +49,7 @@ fn generate_files(commits: Vec<commit::CommitInfo>) {
 
         let data = {
             let mut map = HashMap::new();
+            map.insert("header", templates::header::template_header());
             map.insert("commit_id", &commit.id);
             map.insert("commit_authors", &commit.authors);
             map.insert("commit_date", &commit.date);

@@ -6,12 +6,10 @@ pub fn template_index<'index>() -> &'index str {
             <link rel=\"stylesheet\" href=\"./style.css\"/>
         </head>
         <body>
-            <div class=\"header\">
-                <span>Rdoc HTML Report</span>
-            </div>
-            <ul>
+            {header}
+            <div class=\"items-container\">
                 {commits}
-            </ul>
+            </div>
         </body>
     </html>"
 }

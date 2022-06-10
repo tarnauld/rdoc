@@ -49,7 +49,7 @@ fn find_commit(repo: &Repository, commit_id: git2::Oid) -> commit::CommitInfo {
                 ),
                 message: extract_commit_message(&commit),
                 tag: String::from(""),
-                authors: String::from("")
+                authors: extract_commit_author(&commit)
             };
         }
         Err(e) => panic!("{}", e),
