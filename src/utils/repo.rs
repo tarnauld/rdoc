@@ -49,7 +49,8 @@ fn find_commit(repo: &Repository, commit_id: git2::Oid) -> commit::CommitInfo {
                 ),
                 message: extract_commit_message(&commit),
                 tag: String::from(""),
-                authors: extract_commit_author(&commit)
+                authors: extract_commit_author(&commit),
+                description: String::from("")
             };
         }
         Err(e) => panic!("{}", e),

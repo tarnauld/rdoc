@@ -58,6 +58,7 @@ fn generate_files(commits: Vec<commit::CommitInfo>) {
             map.insert("commit_authors", &*authors.as_str());
             map.insert("commit_date", &commit.date);
             map.insert("commit_message", &commit.message);
+            map.insert("commit_description", &commit.description);
             map.insert("footer", templates::footer::template_footer());
             map
         };
