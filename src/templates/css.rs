@@ -6,15 +6,21 @@ pub fn template_css<'style>() -> &'style str {
     }
     
     body {
-        background-color: white;
+        background-color: #E1E2E1;
         margin: 0;
         display: flex;
         flex-direction: column;
         color: #333;
     }
+
+    .over-header {
+        content: '';
+        height: 20px;
+        background-color: #002171;
+    }
     
     .header {
-        background-color: #02174c;
+        background-color: #0d47a1;
         display: flex;
         align-items: center;
         margin: 0;
@@ -152,7 +158,7 @@ pub fn template_css<'style>() -> &'style str {
         content: '';
         width: 100%;
         height: 50px;
-        background-color: #02174c;
+        background-color: #0d47a1;
     }
     
     "
