@@ -48,9 +48,9 @@ fn find_commit(repo: &Repository, commit_id: git2::Oid) -> commit::CommitInfo {
                     NaiveDateTime::from_timestamp(commit.time().seconds(), 0)
                 ),
                 message: extract_commit_message(&commit),
-                tags: String::from(""),
+                tags: String::from("none"),
                 authors: extract_commit_author(&commit),
-                description: String::from("")
+                description: String::from(""),
             };
         }
         Err(e) => panic!("{}", e),

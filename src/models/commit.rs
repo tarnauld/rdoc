@@ -1,5 +1,5 @@
-use serde_derive::{Serialize, Deserialize};
 use markdown;
+use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CommitInfo {
@@ -9,12 +9,12 @@ pub struct CommitInfo {
     pub message: String,
     pub tags: String,
     pub authors: String,
-    pub description: String
+    pub description: String,
 }
 
 impl CommitInfo {
     pub fn update_tag(&mut self, tags: String) {
-        self.tags = String::from(format!("{};{}", self.tags, tags));
+        self.tags = String::from(format!("{};{}", self.tags, tags)).replace("none;", "");
     }
 
     pub fn update_authors(&mut self, authors: String) {
