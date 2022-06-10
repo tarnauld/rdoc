@@ -21,8 +21,8 @@ pub fn template_commit<'commit>() -> &'commit str {
                 <div class=\"tags\">
                     <span>Tags:</span> {commit_tags}
                 </div>
-                <p>
-                    {commit_message}
+                <p class=\"content\">
+                    Message: {commit_message}
                 </p>
                 <div>
                     {commit_description}

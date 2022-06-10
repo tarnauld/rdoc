@@ -92,6 +92,7 @@ pub fn template_css<'style>() -> &'style str {
 
     .content {
         font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
     }
 
     .fingerprint {

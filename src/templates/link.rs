@@ -15,7 +15,7 @@ pub fn template_link<'link>(commit: &commit::CommitInfo) -> Box<String>{
                     </div>
                 </div>
                 <div class=\"content\">
-                    {}
+                    Message: {}
                 </div>
             </div>
         </a>\n",
