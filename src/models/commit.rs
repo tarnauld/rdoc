@@ -7,14 +7,14 @@ pub struct CommitInfo {
     pub author: String,
     pub date: String,
     pub message: String,
-    pub tag: String,
+    pub tags: String,
     pub authors: String,
     pub description: String
 }
 
 impl CommitInfo {
     pub fn update_tag(&mut self, tags: String) {
-        self.tag = tags;
+        self.tags = String::from(format!("{};{}", self.tags, tags));
     }
 
     pub fn update_authors(&mut self, authors: String) {

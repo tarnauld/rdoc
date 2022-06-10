@@ -81,8 +81,33 @@ pub fn template_css<'style>() -> &'style str {
         margin-right: 1em;
     }
 
+    .tags {
+        display: flex;
+        align-items: center;
+    }
+
+    .tags span {
+        font-size: 12px;
+    }
+
+    .tag {
+        width: fit-content;
+        margin: 5px;
+        padding: 5px;
+        background-color: #a5d6a7;
+        border-radius: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.7rem;
+        color: #555;
+    }
+
     .authors {
         display: flex;
+        align-items: center;
+    }
+
+    .authors span {
+        font-size: 12px;
     }
 
     .author {

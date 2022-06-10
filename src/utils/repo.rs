@@ -48,7 +48,7 @@ fn find_commit(repo: &Repository, commit_id: git2::Oid) -> commit::CommitInfo {
                     NaiveDateTime::from_timestamp(commit.time().seconds(), 0)
                 ),
                 message: extract_commit_message(&commit),
-                tag: String::from(""),
+                tags: String::from(""),
                 authors: extract_commit_author(&commit),
                 description: String::from("")
             };
