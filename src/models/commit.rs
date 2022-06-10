@@ -21,7 +21,7 @@ impl CommitInfo {
         self.authors = String::from(format!("{};{}", self.author, authors));
     }
 
-    pub fn update_description(&mut self, description: String) {
+    pub fn update_description(&mut self, description: &String) {
         self.description = markdown::to_html(description.as_str());
     }
 }

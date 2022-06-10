@@ -8,7 +8,7 @@ pub fn match_commands(matches: ArgMatches) {
         Some(("tag", args)) => tag::create_tag(args.value_of("commit"), args.value_of("tag")),
         Some(("generate", _)) => generate::generate(),
         Some(("authors", args)) => authors::update_authors(args.value_of("commit"), args.value_of("authors")),
-        Some(("describe", args)) => describe::update_description(args.value_of("commit"), args.value_of("description")),
+        Some(("describe", args)) => describe::update_description(args.value_of("commit")),
         _ => std::process::exit(0),
     }
 }
