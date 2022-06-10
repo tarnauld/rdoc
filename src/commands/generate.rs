@@ -14,6 +14,7 @@ pub fn generate() {
     create_index_html(&commits);
     css::generate_css_file();
     generate_files(commits);
+    templates::fingerprint::save_favicon();
 }
 
 fn create_index_html(commits: &Vec<commit::CommitInfo>) {
@@ -49,12 +50,13 @@ fn generate_files(commits: Vec<commit::CommitInfo>) {
         let templ = Template::new(templates::commit::template_commit());
 
         let authors = templates::authors::template_authors(&commit.authors);
+        let fingerprint = templates::fingerprint::template_fingerprint();
 
         let data = {
             let mut map = HashMap::new();
             map.insert("header", templates::header::template_header());
             map.insert("commit_id", &commit.id);
-            map.insert("fingerprint", templates::fingerprint::template_fingerprint());
+            map.insert("fingerprint", &*fingerprint.as_str());
             map.insert("commit_authors", &*authors.as_str());
             map.insert("commit_date", &commit.date);
             map.insert("commit_message", &commit.message);

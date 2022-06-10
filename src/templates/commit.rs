@@ -4,6 +4,7 @@ pub fn template_commit<'commit>() -> &'commit str {
             <title>Rdoc - HTML Report</title>
             <meta name=\"Metadata::Author\" content=\"Rdoc\"/>
             <link rel=\"stylesheet\" href=\"./style.css\"/>
+            <link rel=\"icon\" href=\"./favicon.svg\" type=\"image/svg+xml\">
         </head>
         <body>
             {header}
