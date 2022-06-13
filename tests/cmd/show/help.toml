@@ -1,0 +1,17 @@
+bin.name = "rdoc"
+args = ["show", "--help"]
+status.code = 0
+stdout = """
+rdoc-show 
+Show commit info.
+
+USAGE:
+    rdoc show [commit]
+
+ARGS:
+    <commit>    
+
+OPTIONS:
+    -h, --help    Print help information
+"""
+stderr = ""

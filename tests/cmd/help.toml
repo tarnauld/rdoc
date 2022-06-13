@@ -18,6 +18,7 @@ SUBCOMMANDS:
     index       Generate the rdoc index.
     init        Create an empty Rdoc directory
     search      Returns a list of commits containing expression.
+    show        Show commit info.
     tag         Add tag for a commit
     update      Update the rdoc index.
 """
