@@ -1,0 +1,14 @@
+bin.name = "rdoc"
+args = ["init", "--help"]
+status.code = 0
+stdout = """
+rdoc-init 
+Create an empty Rdoc directory
+
+USAGE:
+    rdoc init
+
+OPTIONS:
+    -h, --help    Print help information
+"""
+stderr = ""

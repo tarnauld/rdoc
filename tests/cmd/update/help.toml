@@ -1,0 +1,14 @@
+bin.name = "rdoc"
+args = ["update", "--help"]
+status.code = 0
+stdout = """
+rdoc-update 
+Update the rdoc index.
+
+USAGE:
+    rdoc update
+
+OPTIONS:
+    -h, --help    Print help information
+"""
+stderr = ""

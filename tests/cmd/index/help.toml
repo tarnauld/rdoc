@@ -1,0 +1,15 @@
+bin.name = "rdoc"
+args = ["index", "--help"]
+status.code = 0
+stdout = """
+rdoc-index 
+Generate the rdoc index.
+
+USAGE:
+    rdoc index [OPTIONS]
+
+OPTIONS:
+        --force    
+    -h, --help     Print help information
+"""
+stderr = ""

@@ -1,0 +1,18 @@
+bin.name = "rdoc"
+args = ["authors", "--help"]
+status.code = 0
+stdout = """
+rdoc-authors 
+Add authors for a commit
+
+USAGE:
+    rdoc authors <commit> <authors>
+
+ARGS:
+    <commit>     
+    <authors>    
+
+OPTIONS:
+    -h, --help    Print help information
+"""
+stderr = ""

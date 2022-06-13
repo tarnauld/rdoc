@@ -1,0 +1,17 @@
+bin.name = "rdoc"
+args = ["describe", "--help"]
+status.code = 0
+stdout = """
+rdoc-describe 
+Add description for a commit (markdown supported)
+
+USAGE:
+    rdoc describe <commit>
+
+ARGS:
+    <commit>    
+
+OPTIONS:
+    -h, --help    Print help information
+"""
+stderr = ""

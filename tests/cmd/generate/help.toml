@@ -1,0 +1,14 @@
+bin.name = "rdoc"
+args = ["generate", "--help"]
+status.code = 0
+stdout = """
+rdoc-generate 
+Generate HTML report for the current GIT repository.
+
+USAGE:
+    rdoc generate
+
+OPTIONS:
+    -h, --help    Print help information
+"""
+stderr = ""

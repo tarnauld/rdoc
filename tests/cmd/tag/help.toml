@@ -1,0 +1,18 @@
+bin.name = "rdoc"
+args = ["tag", "--help"]
+status.code = 0
+stdout = """
+rdoc-tag 
+Add tag for a commit
+
+USAGE:
+    rdoc tag <commit> <tag>
+
+ARGS:
+    <commit>    
+    <tag>       
+
+OPTIONS:
+    -h, --help    Print help information
+"""
+stderr = ""
