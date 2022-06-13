@@ -1,182 +1,152 @@
 pub fn template_css<'style>() -> &'style str {
-    "html, body {
+    ":root {
+        --primary: #4C5454;
+        --primary-dark: #c48b9f;
+        --primary-light: #ffeeff;
+        --secondary: #ffd54f;
+        --secondary-dark: #c8a415;
+        --secondary-light: #ffff81;
+        --fill-dark: #E1E2E1;
+        --fill-light: #F5F5F6;
+        --shadow: #c6c6c6;
+    }
+    
+    html,
+    body {
         width: 100%;
         height: 100%;
         overflow: auto;
+        margin: 0;
+        background-color: var(--fill-dark);
+        font-family: Arial, Helvetica, sans-serif;
     }
     
-    body {
-        background-color: #E1E2E1;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        color: #333;
-    }
-
-    .over-header {
-        content: '';
-        height: 20px;
-        background-color: #002171;
-    }
-    
-    .header {
-        background-color: #0d47a1;
-        display: flex;
-        align-items: center;
-        margin: 0;
+    header {
+        background-color: var(--primary-dark);
         height: 60px;
-        width: 100%;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-    }
-
-    .search {
-        background-color: #5471d2;
-        height: 50px;
         display: flex;
-        padding: 15px;
+        justify-content: center;
+        align-items: center;
     }
 
-    .search input {
-        border-radius: 2px;
-        border: transparent;
+    header > a {
+        text-decoration: none;
+        font-size: 2em;
+        color: var(--primary);
     }
-
-    .search input:focus-visible {
-        outline: none;
+    
+    .search {
+        background-color: var(--primary-light);
+        height: 50px;
     }
     
     .items-container {
-        height: 100%;
+        height: fit-content;
         padding: 1.5em;
-        display: flex;
-        flex-direction: column;
-        overflow: auto;
+        display: grid;
+        grid-gap: 15px;
     }
     
     .item {
-        background-color: #e6e6e6;
-        height: 5em;
-        margin: 10px;
-        border-radius: 2px;
-        box-shadow: 0px 1px 6px #ccc;
-        padding: 1em;
+        background-color: var(--fill-light);
+        border-radius: 5px;
+        box-shadow: 2px 5px 10px var(--shadow);
         display: flex;
-        cursor: pointer;
+        justify-content: space-between;
     }
 
-    .item:hover {
-        background-color: #ddd;
+    .item > .commit {
+        padding: 20px;
+    }
+
+    .item > .commit > div {
+        margin-top: 6px;
     }
     
-    .commit-id {
+    .item .title {
+        font-size: 1.5em;
+        font-weight: 600;
+        color: #444;
+    }
+    
+    .item .metadatas {
+        color: var(--primary);
+        font-size: 0.5em;
+    }
+    
+    .item .authors {
         display: flex;
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
     }
-
-    a {
-        text-decoration: none;
-        color: #333;
-    }
-
-    hr {
-        border-top: 2px solid #bbb;
-        border-radius: 2px;
-    }
-
-    .title {
-        font-size: 2em;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .content {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 12px;
-    }
-
-    .fingerprint {
-        fill: #fff;
-        background-color: #02174c;
-        width: 50px;
-        height: 50px;
-        border-radius: 50px;
-        margin-right: 1em;
-    }
-
-    .tags {
-        display: flex;
-        align-items: center;
-    }
-
-    .tags span {
-        font-size: 12px;
+    
+    .author {
+        background-color: var(--secondary);
+        width: fit-content;
+        padding: 5px;
+        border-radius: 10px;
+        margin-right: 6px;
     }
 
     .tag {
+        background-color: var(--secondary);
         width: fit-content;
-        margin: 5px;
         padding: 5px;
-        background-color: #a5d6a7;
-        border-radius: 20px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.7rem;
-        color: #555;
+        border-radius: 10px;
+        margin-right: 6px;
+    }
+    
+    .item .content {
+        color: var(--primary);
+        font-size: 0.8em;
     }
 
-    .authors {
+    .go {
+        background-color: var(--secondary-dark);
+        width: 200px;
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 
-    .authors span {
-        font-size: 12px;
+    .go > a {
+        text-decoration: none;
+        font-size: 2em;
+        color: var(--fill-light);
     }
-
-    .author {
-        width: fit-content;
-        margin: 5px;
-        padding: 5px;
-        background-color: #ccc;
-        border-radius: 20px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.7rem;
-        color: #555;
-    }
-
-    .fingerprint-container {
-        display: flex;
-        align-items: center;
+    
+    .footer {
+        content: '';
+        height: 50px;
+        background-color: var(--primary-dark);
     }
 
     .commit-container {
         height: 100%;
-        background-color: #e6e6e6;
-        margin: 1.5em;
-        border-radius: 5px;
-        box-shadow: 0px 1px 6px #ccc;
-        padding: 1.5em;
-        font-family: Arial, Helvetica, sans-serif;
+        margin: 20px;
+        background-color: var(--fill-light);
+        border-radius: 3px;
+        box-shadow: 2px 5px 10px #c6c6c6;
+        padding: 20px;
     }
 
-    .commit-container .commit-id {
+    .commit-id {
         display: flex;
-        flex-direction: row;
+        align-items: center;
     }
 
-    .commit-container .commit-id h1 {
-        font-size: 2em;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: normal;
-        color: #333;
+    .commit-id > h1 {
+        overflow-wrap: anywhere;
     }
 
-    .footer {
-        content: '';
-        width: 100%;
-        height: 50px;
-        background-color: #0d47a1;
+    .commit-container > .authors, .tags {
+        display: flex;
+        align-items: center;
+        font-size: 0.6em;
+        margin-top: 6px;
     }
-    
+
+    .commit-container > .authors > span, .tags > span {
+        margin-right: 6px;
+    }
     "
 }
