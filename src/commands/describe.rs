@@ -1,8 +1,8 @@
+use crate::models::commit;
+use crate::utils::file;
 use clap::Arg;
 use clap::Command;
-use crate::utils::file;
-use crate::models::commit;
-use vim_edit::{vim_create};
+use vim_edit::vim_edit;
 
 pub fn init_describe_command<'describe>() -> Command<'describe> {
     return Command::new("describe")
@@ -12,7 +12,8 @@ pub fn init_describe_command<'describe>() -> Command<'describe> {
 
 pub fn update_description(commit: Option<&str>) {
     let commit_id = get_option(commit);
-    let description: String = vim_create();
+    let current_description = &file::find_commit_by_id(commit_id).description;
+    let description: String = vim_edit(current_description.to_string());
 
     let mut commits: Vec<commit::CommitInfo> = file::get_commits_from_index();
     commits.iter_mut().for_each(|commit| {
@@ -23,13 +24,13 @@ pub fn update_description(commit: Option<&str>) {
 
     match file::write_file(commits) {
         Ok(_) => (),
-        Err(_) => ()
+        Err(_) => (),
     };
 }
 
 fn get_option(option: Option<&str>) -> &str {
     match option {
         Some(e) => e,
-        None => panic!()
+        None => panic!(),
     }
 }

@@ -17,6 +17,26 @@ fn parse_index_file() -> std::io::Result<Vec<commit::CommitInfo>> {
     return Ok(commits);
 }
 
+pub fn find_commit_by_id(commit_uid: &str) -> Box<commit::CommitInfo> {
+    let commits = get_commits_from_index();
+    let commit = match commits.iter().find(|commit| commit.id == commit_uid) {
+        Some(commit) => commit,
+        None => {
+            println!("No commit found.");
+            std::process::exit(0);
+        }
+    };
+    return Box::new(commit::CommitInfo {
+        id: commit.id.to_string(),
+        authors: commit.authors.to_string(),
+        author: commit.author.to_string(),
+        description: commit.description.to_string(),
+        date: commit.date.to_string(),
+        message: commit.message.to_string(),
+        tags: commit.tags.to_string(),
+    });
+}
+
 pub fn get_commits_from_index() -> Vec<commit::CommitInfo> {
     return match parse_index_file() {
         Ok(e) => e,

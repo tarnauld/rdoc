@@ -1,4 +1,3 @@
-use markdown;
 use serde_derive::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -22,6 +21,6 @@ impl CommitInfo {
     }
 
     pub fn update_description(&mut self, description: &String) {
-        self.description = markdown::to_html(description.as_str());
+        self.description = description.to_string();
     }
 }

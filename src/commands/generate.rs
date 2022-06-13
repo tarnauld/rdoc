@@ -2,6 +2,7 @@ use crate::models::commit;
 use crate::templates;
 use crate::utils::{css, file, say};
 use clap::Command;
+use markdown;
 use new_string_template::template::Template;
 use std::collections::HashMap;
 
@@ -22,7 +23,10 @@ fn create_index_html(commits: &Vec<commit::CommitInfo>) {
     let data = {
         let mut map = HashMap::new();
         map.insert("header", String::from(templates::header::template_header()));
-        map.insert("search", String::from(*templates::search::template_search()));
+        map.insert(
+            "search",
+            String::from(*templates::search::template_search()),
+        );
         map.insert("commits", generate_links(commits));
         map.insert("footer", String::from(templates::footer::template_footer()));
         map
@@ -53,6 +57,7 @@ fn generate_files(commits: Vec<commit::CommitInfo>) {
         let authors = templates::authors::template_authors(&commit.authors);
         let fingerprint = templates::fingerprint::template_fingerprint();
         let tags = templates::tags::template_tags(&commit.tags);
+        let description = markdown::to_html(commit.description.as_str());
 
         let data = {
             let mut map = HashMap::new();
@@ -63,7 +68,7 @@ fn generate_files(commits: Vec<commit::CommitInfo>) {
             map.insert("commit_tags", &*tags.as_str());
             map.insert("commit_date", &commit.date);
             map.insert("commit_message", &commit.message);
-            map.insert("commit_description", &commit.description);
+            map.insert("commit_description", &description);
             map.insert("footer", templates::footer::template_footer());
             map
         };
