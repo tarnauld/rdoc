@@ -14,6 +14,7 @@ SUBCOMMANDS:
     authors     Add authors for a commit
     describe    Add description for a commit (markdown supported)
     generate    Generate HTML report for the current GIT repository.
+    gitmoji     Lists emojis available (beta)
     help        Print this message or the help of the given subcommand(s)
     index       Generate the rdoc index.
     init        Create an empty Rdoc directory

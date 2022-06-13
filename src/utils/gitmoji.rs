@@ -87,3 +87,81 @@ fn gitmoji_map() -> HashMap<String, String> {
 
     map
 }
+
+pub fn gitmoji_description() -> HashMap<String, String> {
+    let mut map = HashMap::new();
+
+    map.insert(String::from("🎨"), String::from("Improve structure / format of the code."));
+    map.insert(String::from("⚡️"), String::from("Improve performance."));
+    map.insert(String::from("🔥"), String::from("Remove code or files."));
+    map.insert(String::from("🐛"), String::from("Fix a bug."));
+    map.insert(String::from("🚑️"), String::from("Critical hotfix."));
+    map.insert(String::from("✨"), String::from("Introduce new features."));
+    map.insert(String::from("📝"), String::from("Add or update documentation."));
+    map.insert(String::from("🚀"), String::from("Deploy stuff."));
+    map.insert(String::from("💄"), String::from("Add or update the UI and style files."));
+    map.insert(String::from("🎉"), String::from("Begin a project."));
+    map.insert(String::from("✅"), String::from("Add, update, or pass tests."));
+    map.insert(String::from("🔒️"), String::from("Fix security issues."));
+    map.insert(String::from("🔐"), String::from("Add or update secrets."));
+    map.insert(String::from("🔖"), String::from("Release / Version tags."));
+    map.insert(String::from("🚨"), String::from("Fix compiler / linter warnings."));
+    map.insert(String::from("🚧"), String::from("Work in progress."));
+    map.insert(String::from("💚"), String::from("Fix CI Build."));
+    map.insert(String::from("⬇️"), String::from("Downgrade dependencies."));
+    map.insert(String::from("⬆️"), String::from("Upgrade dependencies."));
+    map.insert(String::from("📌"), String::from("Pin dependencies to specific versions."));
+    map.insert(String::from("👷"), String::from("Add or update CI build system."));
+    map.insert(String::from("📈"), String::from("Add or update analytics or track code."));
+    map.insert(String::from("♻️"), String::from("Refactor code."));
+    map.insert(String::from("➕"), String::from("Add a dependency."));
+    map.insert(String::from("➖"), String::from("Remove a dependency."));
+    map.insert(String::from("🔧"), String::from("Add or update configuration files."));
+    map.insert(String::from("🔨"), String::from("Add or update development scripts."));
+    map.insert(String::from("🌐"), String::from("Internationalization and localization."));
+    map.insert(String::from("✏️"), String::from("Fix typos."));
+    map.insert(String::from("💩"), String::from("Write bad code that needs to be improved."));
+    map.insert(String::from("⏪️"), String::from("Revert changes."));
+    map.insert(String::from("🔀"), String::from("Merge branches."));
+    map.insert(String::from("📦️"), String::from("Add or update compiled files or packages."));
+    map.insert(String::from("👽️"), String::from("Update code due to external API changes."));
+    map.insert(String::from("🚚"), String::from("Move or rename resources (e.g.: files, paths, routes)."));
+    map.insert(String::from("📄"), String::from("Add or update license."));
+    map.insert(String::from("💥"), String::from("Introduce breaking changes."));
+    map.insert(String::from("🍱"), String::from("Add or update assets."));
+    map.insert(String::from("♿️"), String::from("Improve accessibility."));
+    map.insert(String::from("💡"), String::from("Add or update comments in source code."));
+    map.insert(String::from("🍻"), String::from("Write code drunkenly."));
+    map.insert(String::from("💬"), String::from("Add or update text and literals."));
+    map.insert(String::from("🗃️"), String::from("Perform database related changes."));
+    map.insert(String::from("🔊"), String::from("Add or update logs."));
+    map.insert(String::from("🔇"), String::from("Remove logs."));
+    map.insert(String::from("👥"), String::from("Add or update contributor(s)."));
+    map.insert(String::from("🚸"), String::from("Improve user experience / usability."));
+    map.insert(String::from("🏗️"), String::from("Make architectural changes."));
+    map.insert(String::from("📱"), String::from("Work on responsive design."));
+    map.insert(String::from("🤡"), String::from("Mock things."));
+    map.insert(String::from("🥚"), String::from("Add or update an easter egg."));
+    map.insert(String::from("🙈"), String::from("Add or update a .gitignore file."));
+    map.insert(String::from("📸"), String::from("Add or update snapshots."));
+    map.insert(String::from("⚗️"), String::from("Perform experiments."));
+    map.insert(String::from("🔍️"), String::from("Improve SEO."));
+    map.insert(String::from("🏷️"), String::from("Add or update types."));
+    map.insert(String::from("🌱"), String::from("Add or update seed files."));
+    map.insert(String::from("🚩"), String::from("Add, update, or remove feature flags."));
+    map.insert(String::from("🥅"), String::from("Catch errors."));
+    map.insert(String::from("💫"), String::from("Add or update animations and transitions."));
+    map.insert(String::from("🗑️"), String::from("Deprecate code that needs to be cleaned up."));
+    map.insert(String::from("🛂"), String::from("Work on code related to authorization, roles and permissions."));
+    map.insert(String::from("🩹"), String::from("Simple fix for a non-critical issue."));
+    map.insert(String::from("🧐"), String::from("Data exploration/inspection."));
+    map.insert(String::from("⚰️"), String::from("Remove dead code."));
+    map.insert(String::from("🧪"), String::from("Add a failing test."));
+    map.insert(String::from("👔"), String::from("Add or update business logic"));
+    map.insert(String::from("🩺"), String::from("Add or update healthcheck."));
+    map.insert(String::from("🧱"), String::from("Infrastructure related changes."));
+    map.insert(String::from("🧑‍💻"), String::from("Improve developer experience"));
+    map.insert(String::from("💸"), String::from("Add sponsorships or money related infrastructure."));
+
+    map
+}
