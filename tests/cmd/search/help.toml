@@ -6,12 +6,17 @@ rdoc-search
 Returns a list of commits containing expression.
 
 USAGE:
-    rdoc search <terms>
+    rdoc search [OPTIONS] <terms>
 
 ARGS:
-    <terms>    
+    <terms>
+            
 
 OPTIONS:
-    -h, --help    Print help information
+        --all
+            Search in commit message and description
+
+    -h, --help
+            Print help information
 """
 stderr = ""
