@@ -4,9 +4,12 @@ use clap::{Arg, Command};
 use std::path::Path;
 
 pub fn init_index_command<'index>() -> Command<'index> {
-    return Command::new("index")
-        .about("Generate the rdoc index.")
-        .arg(Arg::new("force").long("force").takes_value(false));
+    return Command::new("index").about("Generate the rdoc index.").arg(
+        Arg::new("force")
+            .long("force")
+            .short('f')
+            .takes_value(false),
+    );
 }
 
 pub fn create_index(force: bool) {

@@ -9,7 +9,7 @@ USAGE:
     rdoc index [OPTIONS]
 
 OPTIONS:
-        --force    
+    -f, --force    
     -h, --help     Print help information
 """
 stderr = ""
