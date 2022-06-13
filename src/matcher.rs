@@ -1,4 +1,4 @@
-use crate::commands::{authors, describe, generate, index, init, tag, update};
+use crate::commands::{authors, describe, generate, index, init, tag, update, search};
 use clap::ArgMatches;
 
 pub fn match_commands(matches: ArgMatches) {
@@ -12,6 +12,7 @@ pub fn match_commands(matches: ArgMatches) {
         }
         Some(("describe", args)) => describe::update_description(args.value_of("commit")),
         Some(("update", _)) => update::update_index(),
+        Some(("search", args)) => search::search(args.value_of("terms"), args.is_present("all")),
         _ => std::process::exit(0),
     }
 }

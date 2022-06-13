@@ -1,0 +1,17 @@
+bin.name = "rdoc"
+args = ["search", "--help"]
+status.code = 0
+stdout="""
+rdoc-search 
+Returns a list of commits containing expression.
+
+USAGE:
+    rdoc search <terms>
+
+ARGS:
+    <terms>    
+
+OPTIONS:
+    -h, --help    Print help information
+"""
+stderr = ""
