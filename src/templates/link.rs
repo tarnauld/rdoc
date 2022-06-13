@@ -1,5 +1,6 @@
 use crate::models::commit;
 use crate::templates::{fingerprint, authors};
+use crate::utils::gitmoji;
 
 pub fn template_link<'link>(commit: &commit::CommitInfo) -> Box<String>{
     Box::new(format!(
@@ -23,6 +24,6 @@ pub fn template_link<'link>(commit: &commit::CommitInfo) -> Box<String>{
         fingerprint::template_fingerprint(),
         &commit.id[..6],
         *authors::template_authors(&commit.authors),
-        commit.message
+        gitmoji::replace(String::from(commit.message.as_str()))
     ))
 }
